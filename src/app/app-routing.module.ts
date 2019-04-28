@@ -3,7 +3,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
 
 // import pages
-import {SignInComponent} from "~/sign-in/sign-in.component";
+import{SignInComponent} from "~/sign-in/sign-in.component";
 import {SignUpComponent} from "~/sign-up/sign-up.component";
 
 const routes: Routes = [

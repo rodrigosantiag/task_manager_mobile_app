@@ -10,13 +10,18 @@ import {NSAngular2TokenService} from "~/shared/ns-angular2-token/ns-angular2-tok
 export class AppComponent {
     public constructor(private tokenService: NSAngular2TokenService) {
         this.tokenService.init({
-            apiBase: 'http://urldaapi',
+            apiBase: 'http://10.0.3.3:3000',
             globalOptions: {
                 headers: {
                     'Content-Type': 'application;json',
                     'Accept': 'application/vnd.taskmanager.v2'
                 }
             }
-        })
+        });
+
+        this.tokenService.signIn({
+            email: 'rodrigosantiag@gmail.com',
+            password: '12345678'
+        }).subscribe(res => console.dir(res));
     }
 }
