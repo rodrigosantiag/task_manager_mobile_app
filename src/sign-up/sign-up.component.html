@@ -2,34 +2,68 @@
 
 <ScrollView>
     <StackLayout class="page">
-        <StackLayout class="form">
+        <StackLayout [formGroup]="form" class="form">
+
+            <!-- name -->
             <StackLayout class="input-field">
                 <Label text="Nome" class="label font-weight-bold m-b-5"></Label>
-                <TextField class="input"></TextField>
+                <TextField formControlName="name" class="input"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
+
+                <StackLayout *ngIf="form.get('name').invalid && form.get('name').dirty">
+                    <Label class="text-right text-danger" *ngIf="form.get('name').errors.required" text="Campo obrigatório"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('name').errors.minlength" text="Deve ter no mínimo {{ form.get('name').errors.minlength.requiredLength }} caracteres"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('name').errors.maxlength" text="Deve ter no máximo {{ form.get('name').errors.maxlength.requiredLength }} caracteres"></Label>
+                </StackLayout>
             </StackLayout>
 
+            <!-- email -->
             <StackLayout class="input-field">
                 <Label text="Email" class="label font-weight-bold m-b-5"></Label>
-                <TextField class="input" keyboardType="email" autocapitalizationType="none"
+                <TextField formControlName="email" class="input" keyboardType="email" autocapitalizationType="none"
                            autocorrect="false"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
+
+                <StackLayout *ngIf="form.get('email').invalid && form.get('email').dirty">
+                    <Label class="text-right text-danger" *ngIf="form.get('email').errors.required" text="Campo obrigatório"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('email').errors.email" text="E-mail inválido"></Label>
+                </StackLayout>
             </StackLayout>
 
+            <!-- password -->
             <StackLayout class="input-field">
                 <Label text="Senha" class="label font-weight-bold m-b-5"></Label>
-                <TextField class="input" secure="true"></TextField>
+                <TextField formControlName="password" class="input" secure="true"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
+
+                <StackLayout *ngIf="form.get('password').invalid && form.get('password').dirty">
+                    <Label class="text-right text-danger" *ngIf="form.get('password').errors.required" text="Campo obrigatório"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('password').errors.minlength" text="Deve ter no mínimo {{ form.get('password').errors.minlength.requiredLength }} caracteres"></Label>
+                </StackLayout>
             </StackLayout>
 
+            <!-- password confirmation -->
             <StackLayout class="input-field">
                 <Label text="Confirmação de senha" class="label font-weight-bold m-b-5"></Label>
-                <TextField class="input" secure="true"></TextField>
+                <TextField formControlName="passwordConfirmation" class="input" secure="true"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
             </StackLayout>
+
+            <StackLayout *ngIf="form.get('passwordConfirmation').invalid && form.get('passwordConfirmation').dirty">
+                <Label class="text-right text-danger" *ngIf="form.get('passwordConfirmation').errors.required" text="Campo obrigatório"></Label>
+                <Label class="text-right text-danger" *ngIf="form.get('passwordConfirmation').errors.mismatch" text="Senhas não correspondem"></Label>
+            </StackLayout>
+
+            <!-- formErrors -->
+            <StackLayout *ngIf="formErrors" class="formErrors">
+                <Label class="font-weight-bold" text="Ocorreu um erro na criação da sua conta"></Label>
+                <Label *ngFor="let error of formErrors" [text]="error" class="text-danger" textWrap="true"></Label>
+            </StackLayout>
+
+            <!-- buttons -->
+            <Button text="Criar conta" class="btn btn-primary" [isEnabled]="form.valid && !submitted" (tap)="signUpUser()"></Button>
+            <Button text="Login" nsRouterLink="/sign-in" pageTransition="slideRight" class="btn btn-outline"></Button>
         </StackLayout>
 
-        <Button text="Criar conta" class="btn btn-primary"></Button>
-        <Button text="Login" nsRouterLink="/sign-in" pageTransition="slideRight" class="btn btn-outline"></Button>
     </StackLayout>
 </ScrollView>

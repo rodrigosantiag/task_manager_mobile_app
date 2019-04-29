@@ -14,3 +14,9 @@ refer to http://docs.nativescript.org/ui/theme.
 .action-bar{
     background-color: #6A8D00;
 }
+
+.formErrors{
+    background-color: #f4d7d8;
+    margin: 20px;
+    padding: 10px;
+}
