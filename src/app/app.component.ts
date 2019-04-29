@@ -18,10 +18,5 @@ export class AppComponent {
         }
       }
     });
-
-    this.tokenService.signIn({
-      email: 'rodrigosantiag@gmail.com',
-      password: '12345678'
-    }).subscribe(res => console.dir(res));
   }
 }
