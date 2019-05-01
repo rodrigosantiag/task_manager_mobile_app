@@ -10,7 +10,7 @@
         <ng-template let-task="item">
             <GridLayout class="list-group-item" columns="35px, *, auto">
                 <Label col="0" [text]="checkboxIcon(task)" class="fa"></Label>
-                <Label col="1" [text]="task.title"></Label>
+                <Label col="1" [class.done-task]="task.done" [text]="task.title" class="list-group-item-text"></Label>
                 <Label col="2" class="fa" [text]="icons.get('trash')"></Label>
             </GridLayout>
         </ng-template>
