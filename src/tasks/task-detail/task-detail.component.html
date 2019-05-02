@@ -1,1 +1,45 @@
-<Label text="detalhes"></Label>
+<ActionBar title="TaskManager - Detalhes" class="action-bar"></ActionBar>
+
+<ScrollView>
+    <StackLayout class="page">
+        <StackLayout [formGroup]="form" class="form">
+
+            <!-- title -->
+            <StackLayout class="input-field">
+                <Label text="Título" class="label font-weight-bold m-b-5"></Label>
+                <TextField formControlName="title" class="input"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+
+                <StackLayout *ngIf="form.get('title').invalid && form.get('title').dirty">
+                    <Label class="text-right text-danger" *ngIf="form.get('title').errors.required" text="Campo obrigatório"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('title').errors.minlength" text="Deve ter no mínimo {{ form.get('title').errors.minlength.requiredLength }} caracteres"></Label>
+                    <Label class="text-right text-danger" *ngIf="form.get('title').errors.maxlength" text="Deve ter no máximo {{ form.get('title').errors.maxlength.requiredLength }} caracteres"></Label>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- descriptiom -->
+            <StackLayout class="input-field">
+                <Label text="Descrição" class="label font-weight-bold m-b-5"></Label>
+                <TextField formControlName="descriptiom" class="input"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+
+            <!-- deadline -->
+            <StackLayout class="input-field">
+                <Label text="Prazo de Entrega" class="label font-weight-bold m-b-5"></Label>
+                <TextField formControlName="deadline" class="input" editable="false"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+
+            <!-- done -->
+            <GridLayout class="input-field" columns="*, auto">
+                <Label col="0" text="Tarefa Feita" class="label font-weight-bold m-b-5"></Label>
+                <Switch col="1" formControlName="done" class="switch"></Switch>
+            </GridLayout>
+
+            <!-- buttons -->
+            <Button text="Atualizar" class="btn btn-primary" [isEnabled]="form.valid" (tap)="updateTask()"></Button>
+        </StackLayout>
+
+    </StackLayout>
+</ScrollView>
