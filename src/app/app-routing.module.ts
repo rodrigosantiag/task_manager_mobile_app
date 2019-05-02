@@ -6,6 +6,7 @@ import {Routes} from "@angular/router";
 import {HomeComponent} from "~/home/home.component";
 import {SignInComponent} from "~/sign-in/sign-in.component";
 import {SignUpComponent} from "~/sign-up/sign-up.component";
+import {TaskDetailComponent} from "~/tasks/task-detail/task-detail.component";
 import {TasksComponent} from "~/tasks/tasks.component";
 
 // import guards
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
+  {path: 'tasks/:id', component: TaskDetailComponent},
   {path: 'tasks', component: TasksComponent}
 ];
 

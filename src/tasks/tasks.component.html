@@ -6,7 +6,7 @@
         <Label col="1" [text]="icons.get('add')" class="fa" (tap)="createTask()"></Label>
     </GridLayout>
 
-    <ListView row="1" class="list-group" [items]="tasks">
+    <ListView row="1" class="list-group" [items]="tasks" (itemTap)="goToTaskDetail($event)">
         <ng-template let-task="item">
             <GridLayout class="list-group-item" columns="35px, *, auto">
                 <Label col="0" [text]="checkboxIcon(task)" class="fa" (tap)="taskDone(task)"></Label>
