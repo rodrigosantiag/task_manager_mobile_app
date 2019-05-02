@@ -15,6 +15,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HomeComponent} from "~/home/home.component";
 import {SignInComponent} from "~/sign-in/sign-in.component";
 import {SignUpComponent} from "~/sign-up/sign-up.component";
+import {TaskDetailComponent} from "~/tasks/task-detail/task-detail.component";
 import {TasksComponent} from "~/tasks/tasks.component";
 
 //  service imports
@@ -50,6 +51,7 @@ import 'rxjs/add/observable/throw';
     HomeComponent,
     SignInComponent,
     SignUpComponent,
+    TaskDetailComponent,
     TasksComponent
   ],
   providers: [
