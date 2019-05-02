@@ -1,4 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
+
+import {Task} from './shared/task.model';
+import {TaskService} from './shared/task.service';
+import * as dialogs from 'tns-core-modules/ui/dialogs';
 
 @Component({
   selector: 'app-tasks',
@@ -8,27 +12,62 @@ import {Component} from "@angular/core";
 })
 
 export class TasksComponent {
-  public tasks: Array<any> = [];
   public icons: Map<string, string> = new Map<string, string>();
+  public tasks: Array<Task>;
+  public newTask: Task;
 
-  public constructor() {
-    this.tasks = [
-      { id: 1, title: "Comprar Notebook Novo", done: false },
-      { id: 2, title: "Lavar o carro", done: false },
-      { id: 3, title: "Assitir série XYZ", done: false },
-      { id: 4, title: "Estudar NativeScript", done: true },
-      { id: 6, title: "Comprar Notebook Novo", done: false },
-      { id: 7, title: "Lavar o carro", done: false },
-      { id: 8, title: "Assitir série XYZ", done: false },
-      { id: 9, title: "Estudar NativeScript", done: true },
-      { id: 10, title: "Comprar Notebook Novo", done: false },
-      { id: 11, title: "Lavar o carro", done: false },
-      { id: 12, title: "Assitir série XYZ", done: false },
-      { id: 13, title: "Estudar NativeScript", done: false },
-      { id: 14, title: "Comprar Notebook Novo", done: false }
-    ];
-
+  public constructor(private taskService: TaskService) {
+    this.newTask = new Task(null, '');
     this.setIcons();
+  }
+
+  public ngOnInit(): void {
+    this.taskService.getAll()
+      .subscribe(
+        tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
+        error => alert('Ocorreu um erro no servidor, tente mais tarde')
+      );
+  }
+
+  public createTask(): void {
+    this.newTask.title = this.newTask.title.trim()
+
+    if (!this.newTask.title) {
+      alert('A tarefa deve ter um título');
+    } else {
+      this.taskService.create(this.newTask)
+        .subscribe(
+          (task) => {
+            this.tasks.unshift(task);
+            this.newTask = new Task(null, '');
+          },
+          () => alert('Ocorreu um erro no servidor, tente mais tarde.')
+        );
+    }
+  }
+
+  public deleteTask(task: Task): void {
+    dialogs.confirm(`Deseja realmente excluir a tarefa "${task.title}"?`).then(result => {
+        if (result) {
+          this.taskService.delete(task.id)
+            .subscribe(
+              () => this.tasks = this.tasks.filter(t => t !== task),
+              () => alert('Ocorreu um erro no servidor, tente mais tarde.')
+            );
+        }
+      }
+    )
+  }
+
+  public taskDone(task: Task) {
+    task.done= !task.done;
+
+    this.taskService.update(task).subscribe({
+      error: () => {
+        task.done = !task.done;
+        alert('Ocorreu um erro no servidor, tente mais tarde.');
+      }
+    })
   }
 
   private setIcons() {
