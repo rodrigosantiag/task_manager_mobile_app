@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {ModalDialogParams} from "nativescript-angular";
 import {Page} from "tns-core-modules/ui/page";
 import{DatePicker} from "tns-core-modules/ui/date-picker";
