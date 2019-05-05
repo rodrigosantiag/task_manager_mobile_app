@@ -65,9 +65,34 @@ export class TaskDetailComponent implements OnInit{
   public showDateTimePickerModal() {
     let modalOptions: ModalDialogOptions = {
       fullscreen: false,
-      viewContainerRef: this.vcRef
+      viewContainerRef: this.vcRef,
+      context: {
+        preSelectedDateTime: this.getFormDeadLineToDate()
+      }
     };
 
-    this.modalService.showModal(DatetimePickerModalComponent, modalOptions);
+    this.modalService.showModal(DatetimePickerModalComponent, modalOptions)
+      .then(newDateTime => this.setNewDeadline(newDateTime));
+  }
+
+  public getFormDeadLineToDate() {
+    let deadline = this.form.get('deadline').value;
+
+    if(deadline){
+      // Dealine format: 23/01/2019 12:00
+      let [date, time] = deadline.split(' ');
+      let [day, month, year] = date.split('/');
+      let [hours, minutes] = time.split(':');
+
+      return new Date(year, month - 1, day, hours, minutes);
+    }
+  }
+
+  public setNewDeadline(newDeadline: Date) {
+    if(newDeadline) {
+      let formattedDeadline = `${newDeadline.getDate()}/${newDeadline.getMonth() + 1}/${newDeadline.getFullYear()} ${newDeadline.getHours()}:${newDeadline.getMinutes()}`;
+
+      this.form.patchValue({deadline: formattedDeadline});
+    }
   }
 }

@@ -1,8 +1,8 @@
 <ScrollView>
     <StackLayout>
-        <DatePicker id="datePicker"></DatePicker>
-        <TimePicker id="timePicker"></TimePicker>
+        <DatePicker #datePicker ></DatePicker>
+        <TimePicker #timePicker ></TimePicker>
 
-        <Button class="btn btn-primary" text="OK"></Button>
+        <Button class="btn btn-primary" text="OK" (tap)="sendNewDateTime()"></Button>
     </StackLayout>
 </ScrollView>
