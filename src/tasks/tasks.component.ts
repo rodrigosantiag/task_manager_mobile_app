@@ -8,6 +8,8 @@ import {Page} from "tns-core-modules/ui/page";
 
 import * as dialogs from 'tns-core-modules/ui/dialogs';
 
+import * as SocialShare from "nativescript-social-share";
+
 @Component({
   selector: 'app-tasks',
   moduleId: module.id,
@@ -70,7 +72,7 @@ export class TasksComponent {
   }
 
   public taskDone(task: Task) {
-    task.done= !task.done;
+    task.done = !task.done;
 
     this.taskService.update(task).subscribe({
       error: () => {
@@ -90,9 +92,19 @@ export class TasksComponent {
     this.icons.set('add', String.fromCharCode(0xf055));
     this.icons.set('checked', String.fromCharCode(0xf14a));
     this.icons.set('unchecked', String.fromCharCode(0xf096));
+    this.icons.set('social-share', String.fromCharCode(0xf1e0));
   }
 
   public checkboxIcon(task) {
     return task.done ? this.icons.get('checked') : this.icons.get('unchecked');
+  }
+
+  public shareTasks() {
+    let taskListString = this.tasks
+      .map(task => `${task.doneCheckboxString} ${task.title}`)
+      .join(', \n')
+      .trim();
+
+    SocialShare.shareText(taskListString);
   }
 }
