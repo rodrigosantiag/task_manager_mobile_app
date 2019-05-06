@@ -3,6 +3,9 @@ import {Router} from "@angular/router";
 
 import {Task} from './shared/task.model';
 import {TaskService} from './shared/task.service';
+
+import {Page} from "tns-core-modules/ui/page";
+
 import * as dialogs from 'tns-core-modules/ui/dialogs';
 
 @Component({
@@ -17,12 +20,18 @@ export class TasksComponent {
   public tasks: Array<Task>;
   public newTask: Task;
 
-  public constructor(private taskService: TaskService, private router: Router) {
+  public constructor(private taskService: TaskService, private router: Router, private page: Page) {
     this.newTask = new Task(null, '');
     this.setIcons();
   }
 
   public ngOnInit(): void {
+    this.loadTasks();
+
+    this.page.on("navigatingTo", () => this.loadTasks());
+  }
+
+  private loadTasks() {
     this.taskService.getAll()
       .subscribe(
         tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
