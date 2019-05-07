@@ -6,7 +6,7 @@ import {ModalDialogService, ModalDialogOptions} from "nativescript-angular";
 
 import 'rxjs/add/operator/switchMap';
 
-import {DatetimePickerModalComponent} from "~/datetime-picker-modal/datetime-picker-modal.component";
+import {DatetimePickerModalComponent} from "~/pages/datetime-picker-modal/datetime-picker-modal.component";
 import {Task} from '../shared/task.model';
 import {TaskService} from '../shared/task.service';
 

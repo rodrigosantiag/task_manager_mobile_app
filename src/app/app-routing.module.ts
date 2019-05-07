@@ -3,11 +3,11 @@ import {NativeScriptRouterModule} from "nativescript-angular/router";
 import {Routes} from "@angular/router";
 
 // import pages
-import {HomeComponent} from "~/home/home.component";
-import {SignInComponent} from "~/sign-in/sign-in.component";
-import {SignUpComponent} from "~/sign-up/sign-up.component";
-import {TaskDetailComponent} from "~/tasks/task-detail/task-detail.component";
-import {TasksComponent} from "~/tasks/tasks.component";
+import {HomeComponent} from "~/pages/home/home.component";
+import {SignInComponent} from "~/pages/sign-in/sign-in.component";
+import {SignUpComponent} from "~/pages/sign-up/sign-up.component";
+import {TaskDetailComponent} from "~/pages/tasks/task-detail/task-detail.component";
+import {TasksComponent} from "~/pages/tasks/tasks.component";
 
 // import guards
 import {AuthGuard} from "~/guards/auth.guard";

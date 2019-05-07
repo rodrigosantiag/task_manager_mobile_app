@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 
 import {Task} from './task.model';
-import {TokenService} from '../../shared/token.service';
+import {TokenService} from "~/shared/token.service";
 
 @Injectable()
 
