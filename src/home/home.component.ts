@@ -14,7 +14,7 @@ export class HomeComponent {
   public constructor(private authService: AuthService, private router: Router ) {}
 
   public signOutUser(): void {
-    this.authService.signOut().
-      subscribe(() => this.router.navigate(['/sign-in']));
+    this.authService.signOut().subscribe();
+    this.router.navigate(['/sign-in']);
   }
 }
