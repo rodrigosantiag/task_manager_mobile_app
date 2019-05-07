@@ -13,6 +13,7 @@ android {
   defaultConfig {
     minSdkVersion 17
     generatedDensities = []
+    applicationId = "com.santive.taskmanagersantive"
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"

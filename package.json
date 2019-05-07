@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.taskmanagermobileapp",
+    "id": "com.santive.taskmanagersantive",
     "tns-android": {
       "version": "5.3.1"
     },
