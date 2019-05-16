@@ -28,8 +28,8 @@
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.5.1",
     "tns-core-modules": "^5.4.0",
-    "zone.js": "^0.8.4",
-    "typescript": "~3.1.1"
+    "typescript": "~3.1.1",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@angular/compiler-cli": "~7.2.0",
